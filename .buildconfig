@@ -1,0 +1,13 @@
+[default-2]
+name=ft_ls
+runtime=host
+config-opts=
+run-opts=
+prefix=/home/me/.cache/gnome-builder/install/ft_ls/host
+app-id=
+postbuild=
+prebuild=
+default=true
+
+[default-2.environment]
+-l=includes
