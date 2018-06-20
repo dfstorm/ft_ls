@@ -1,33 +1,27 @@
-C_FILES = main.c
-
 PROJECT = ft_ls
-NAME = $(PROJECT).a
+NAME = $(PROJECT)
+
+C_FILES += src/main.c\
+src/flags.c\
+src/debug.c\
+src/errors.c\
+src/utils.c\
+src/print_file.c\
+src/print_dir.c
+
+LIBFT = ./libft/libft.a
+LIBFTC = libft/
 CC = gcc
-CLANGS = -g -Wall -Werror -Wextra
+CFLAGS += -o
 
-SRC_PATH = ./src/
-INC_PATH = ./includes/
-OBJ_PATH = ./obj/
 
-OBJ_NAME = $(C_FILES:.c=.o)
-
-SRC = $(addprefix $(SRC_PATH),$(C_FILES))
-OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
-INC = $(addprefix -I,$(INC_PATH))
-
-all: $(NAME)
-
-$(OBJ_PATH)%.o: $(SRC_PATH)/%.c
-	@$(CC) $(CFLAGS) $(INC) -o $@ -c $<
-
-$(NAME): $(OBJ)
-	@ar -rc $(NAME) $^
-	@ranlib $(NAME)
-
+all:
+	make -C $(LIBFTC)
+	$(CC) $(CFLAGS) $(NAME) $(C_FILES) $(LIBFT);
+test: all
+	./$(NAME) .
 clean:
-	/bin/rm -rf $(OBJ_PATH)
+	/bin/rm $(NAME)
+re: clean all
 
-fclean: clean
-	/bin/rm -rf $(NAME)
 
-re: fclean all
